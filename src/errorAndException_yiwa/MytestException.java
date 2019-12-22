@@ -1,6 +1,6 @@
 package errorAndException_yiwa;
 
-public class MytestException extends Exception {
+public class MytestException extends RuntimeException {
    public MytestException(){
        super();
    }
