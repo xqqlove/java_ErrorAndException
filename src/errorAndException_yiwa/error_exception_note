@@ -1,0 +1,46 @@
+https://blog.csdn.net/qq_29229567/article/details/89397648
+Throwable{
+  1.Error(非受查异常)
+
+  2.Exception{
+      1.编译时异常(受查异常checked)：这类异常程序员必须处理，要么向上抛出要么try-catch 捕获处理
+               IOException,SQLException,ClassNotFoundException,CloneNotSupportedException
+      2.运行时异常(非受查异常unchecked)：RuntimeException{
+               1.ArithmeticException算术条件异常
+               2.ClassCastException类型转换异常类
+               3.IllegalArgumentException非法参数异常
+               4.NullPointerException空指针异常
+               5.ArrayIndexOutOfBoundsException
+               ....
+      }
+  }
+
+  1.如果是不可查异常（unchecked exception），即Error、RuntimeException或它们的子类，
+    那么可以不使用throws关键字来声明要抛出的异常，编译仍能顺利通过，但在运行时会被系
+    统抛出。
+  2.如果一个方法可能出现可查异常（checked exception），要么用try-catch语句捕获，要么
+    用throws子句声明将它抛出，否则会导致编译错误。
+  3.只有当抛出了可检查异常时，该方法的调用者才必须处理或者重新抛出该异常。当方法的调用者无力
+    处理该异常的时候，应该继续抛出
+  4.如果抛出了可查异常，则还应该在方法头部声明方法可能抛出的异常类型。
+    该方法的调用者也必须检查处理抛出的异常
+  5.如果抛出的是Error或RuntimeException，则该方法的调用者可选择处理该异常。
+
+  异常处理方式：1.try-catch-finally  2.throws
+     finally声明的代码一定会被执行的，即使catch中出现了异常，try中有return，catch中有return语句
+     其实，在下述4种特殊情况时，finally块都不会被执行：
+           1）在finally语句块中发生了异常。
+           2）在前面的代码中用了System.exit()退出程序。
+           3）程序所在的线程死亡。
+           4）关闭CPU。
+     父类的方法抛出异常 子类方法抛出的异常必须小于父类
+
+  try-catch-finally 和    throws选哪个
+       1.如果父类被重写的方法没有throws方式处理异常，
+        则子类重写不能使用throws  只能用try-catch-fianlly处理异常
+       2.执行的方法a中，先后调用了另外几个方法，这几个方法的关系是递进关系执行，建议使用
+        throws方式，在a中最后用try-catch进行处理
+
+  关于异常对象的产生：1.系统自动生成的异常对象
+                     2.手动生成的一个异常对象，并抛出throw
+}
